@@ -23,13 +23,13 @@ jobs:
             - name: Create React App
               run: >-
                   yarn create react-app ${{env.SLT}} --template typescript &&
+                  yarn add ${{env.SLR}} &&
                   cd ${{env.SLT}}
 
             - name: Copy Node Module
               run: >-
                   cd $WORKDIR &&
-                  mkdir -p $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}} &&
-                  cp . ${{env.SLT}}/node_modules/${{env.SLR}}
+                  cp -r . ${{env.SLT}}/node_modules/${{env.SLR}}
 
             - name: Build Imported Modules
               run: >-
