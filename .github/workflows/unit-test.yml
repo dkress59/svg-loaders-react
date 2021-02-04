@@ -5,9 +5,9 @@ name: Unit Test CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, feature/workflow ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, feature/workflow ]
 
 jobs:
   build:
