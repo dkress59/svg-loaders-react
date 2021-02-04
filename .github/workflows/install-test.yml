@@ -23,8 +23,8 @@ jobs:
             - name: Create React App
               run: >-
                   yarn create react-app ${{env.SLT}} --template typescript &&
-                  yarn add ${{env.SLR}} &&
-                  cd ${{env.SLT}}
+                  cd ${{env.SLT}} &&
+                  yarn add ${{env.SLR}}
 
             - name: Copy Node Module
               run: >-
