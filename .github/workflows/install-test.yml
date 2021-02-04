@@ -28,12 +28,8 @@ jobs:
             - name: Copy Node Module
               run: >-
                   cd $WORKDIR &&
-                  mkdir -p $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}}/src &&
-                  cp tsconfig.json ${{env.SLT}}/node_modules/${{env.SLR}}/tsconfig.json &&
-                  cp package.json ${{env.SLT}}/node_modules/${{env.SLR}}/package.json &&
-                  cp .prettierrc ${{env.SLT}}/node_modules/${{env.SLR}}/.prettierrc &&
-                  cp yarn.lock ${{env.SLT}}/node_modules/${{env.SLR}}/yarn.lock &&
-                  cp -r src/* ${{env.SLT}}/node_modules/${{env.SLR}}/src
+                  mkdir -p $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}} &&
+                  cp . ${{env.SLT}}/node_modules/${{env.SLR}}
 
             - name: Build Imported Modules
               run: >-
