@@ -1,4 +1,4 @@
-name: Module Import
+name: Install Test CI
 
 on:
     push:
@@ -7,7 +7,7 @@ on:
         branches: [ master, feature/workflow ]
 
 jobs:
-    test_import:
+    import:
         runs-on: ubuntu-latest
         env:
             SLT: 'svg-loaders-tester'
@@ -20,12 +20,12 @@ jobs:
                   node-version: '15'
                   check-latest: true
 
-            - name: ⚛️ Create React App
+            - name: Create React App
               run: >-
                   yarn create react-app ${{env.SLT}} --template typescript &&
                   cd ${{env.SLT}}
 
-            - name: ⛓ Copy Source
+            - name: Copy Node Module
               run: >-
                   cd $WORKDIR &&
                   mkdir -p $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}}/src &&
@@ -35,14 +35,7 @@ jobs:
                   cp yarn.lock ${{env.SLT}}/node_modules/${{env.SLR}}/yarn.lock &&
                   cp -r src/* ${{env.SLT}}/node_modules/${{env.SLR}}/src
 
-            - name: 🏋🏼‍♀️ Build Node Module
-              run: >-
-                  cd $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}} &&
-                  yarn --pure-lockfile --ignore-scripts &&
-                  cd .. && cd ${{env.SLR}} &&
-                  yarn build
-
-            - name: 📥 Test Module Import
+            - name: Build Imported Modules
               run: >-
                   cd $WORKDIR &&
                   rm -f ${{env.SLT}}/src/App.ts ${{env.SLT}}/src/App.tsx &&
