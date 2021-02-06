@@ -26,7 +26,9 @@ jobs:
         run: >-
             npx create-react-app ${{env.SLT}} &&
             cd ${{env.SLT}} &&
-            npm install ${{env.SLR}}
+            rm -rf node_modules &&
+            yarn &&
+            yarn add ${{env.SLR}}
 
       - name: Update Node Module
         run: >-
@@ -40,7 +42,7 @@ jobs:
             rm -f ${{env.SLT}}/src/App.js ${{env.SLT}}/src/App.jsx &&
             cp test/install.test ${{env.SLT}}/src/App.jsx &&
             cd ${{env.SLT}} &&
-            npm run build
+            yarn build
 
   TypeScript:
     runs-on: ubuntu-latest
@@ -60,13 +62,17 @@ jobs:
         run: >-
             npx create-react-app ${{env.SLT}} --template typescript &&
             cd ${{env.SLT}} &&
-            npm install ${{env.SLR}}
+            rm -rf node_modules &&
+            yarn &&
+            yarn add ${{env.SLR}}
 
       - name: Update Node Module
         run: >-
             cd $WORKDIR &&
             rm -rf ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
-            cp -r src dist package.json tsconfig.json ${{env.SLT}}/node_modules/${{env.SLR}}
+            cp -r src dist package.json tsconfig.json ${{env.SLT}}/node_modules/${{env.SLR}} &&
+            ls ${{env.SLT}}/node_modules/${{env.SLR}} &&
+            ls ${{env.SLT}}/node_modules/${{env.SLR}}/src
 
       - name: Build with imported Module
         run: >-
@@ -74,4 +80,4 @@ jobs:
             rm -f ${{env.SLT}}/src/App.ts ${{env.SLT}}/src/App.tsx &&
             cp test/install.test ${{env.SLT}}/src/App.tsx &&
             cd ${{env.SLT}} &&
-            npm run build
+            yarn build
