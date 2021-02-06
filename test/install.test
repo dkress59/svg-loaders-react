@@ -1,0 +1,34 @@
+import {
+	Audio,
+	BallTriangle,
+	Bars,
+	Circles,
+	Grid,
+	Hearts,
+	Oval,
+	Puff,
+	Rings,
+	SpinningCircles,
+	TailSpin,
+	ThreeDots,
+} from 'svg-loaders-react'
+import React from 'react'
+
+export default function App() {
+	return (
+		<>
+			<Audio />
+			<BallTriangle />
+			<Bars />
+			<Circles />
+			<Grid />
+			<Hearts />
+			<Oval />
+			<Puff />
+			<Rings />
+			<SpinningCircles />
+			<TailSpin />
+			<ThreeDots />
+		</>
+	)
+}
