@@ -7,7 +7,42 @@ on:
     branches: [ master, feature/workflow ]
 
 jobs:
-  integration:
+
+  JavaScript:
+    runs-on: ubuntu-latest
+    env:
+      SLT: 'svg-loaders-tester'
+      SLR: 'svg-loaders-react'
+      WORKDIR: '/home/runner/work/svg-loaders-react/svg-loaders-react'
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '15'
+          check-latest: true
+
+      - name: Create React App
+        run: >-
+            npx create-react-app ${{env.SLT}} &&
+            cd ${{env.SLT}} &&
+            npm install ${{env.SLR}}
+
+      - name: Update Node Module
+        run: >-
+            cd $WORKDIR &&
+            rm -rf ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
+            cp -r src dist package.json ${{env.SLT}}/node_modules/${{env.SLR}}
+
+      - name: Build with imported Module
+        run: >-
+            cd $WORKDIR &&
+            rm -f ${{env.SLT}}/src/App.js ${{env.SLT}}/src/App.jsx &&
+            cp test/install.test ${{env.SLT}}/src/App.jsx &&
+            cd ${{env.SLT}} &&
+            npm run build
+
+  TypeScript:
     runs-on: ubuntu-latest
     env:
       SLT: 'svg-loaders-tester'
@@ -25,18 +60,18 @@ jobs:
         run: >-
             npx create-react-app ${{env.SLT}} --template typescript &&
             cd ${{env.SLT}} &&
-            yarn add ${{env.SLR}}
+            npm install ${{env.SLR}}
 
       - name: Update Node Module
         run: >-
             cd $WORKDIR &&
             rm -rf ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
-            cp -r src dist package.json tsconfig.json .prettierrc yarn.lock ${{env.SLT}}/node_modules/${{env.SLR}}
+            cp -r src dist package.json tsconfig.json ${{env.SLT}}/node_modules/${{env.SLR}}
 
-      - name: Build Imported Modules
+      - name: Build with imported Module
         run: >-
             cd $WORKDIR &&
             rm -f ${{env.SLT}}/src/App.ts ${{env.SLT}}/src/App.tsx &&
             cp test/install.test ${{env.SLT}}/src/App.tsx &&
             cd ${{env.SLT}} &&
-            yarn build
+            npm run build
