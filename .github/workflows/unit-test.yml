@@ -35,18 +35,27 @@ jobs:
         yarn test
 
     - name: Create React App
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
     - run: >-
         npx create-react-app ${{env.SLT}} --template typescript &&
         cd ${{env.SLT}} &&
         yarn add ${{env.SLR}}
 
     - name: Update Node Module
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
     - run: >-
         cd $WORKDIR &&
         rm -rf ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
         cp -r src package.json tsconfig.json .prettierrc yarn.lock ${{env.SLT}}/node_modules/${{env.SLR}}
 
     - name: Build Imported Modules
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
       run: >-
         cd $WORKDIR &&
         rm -f ${{env.SLT}}/src/App.ts ${{env.SLT}}/src/App.tsx &&
