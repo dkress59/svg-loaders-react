@@ -2,9 +2,9 @@ name: Unit Test CI
 
 on:
     push:
-        branches: [master]
-    pull_request:
         branches: [master, 'dependabot/*']
+    pull_request:
+        branches: [master]
 
 jobs:
     build:
