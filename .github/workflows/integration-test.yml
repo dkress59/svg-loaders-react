@@ -31,7 +31,7 @@ jobs:
               run: >-
                   cd $WORKDIR &&
                   rm -rf ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
-                  cp -r src dist package.json $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}} &&
+                  rsync -av --progress . $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}} --exclude /${{env.SLT}} &&
                   ls -a ${{env.SLT}}/node_modules/${{env.SLR}} &&
                   ls -a ${{env.SLT}}
 
@@ -67,7 +67,9 @@ jobs:
               run: >-
                   cd $WORKDIR &&
                   rm -rf ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
-                  cp -r src dist package.json tsconfig.json $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}}
+                  rsync -av --progress . $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}} --exclude /${{env.SLT}} &&
+                  ls -a ${{env.SLT}}/node_modules/${{env.SLR}} &&
+                  ls -a ${{env.SLT}}
 
             - name: Build with imported Module
               run: >-
