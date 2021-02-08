@@ -30,8 +30,8 @@ jobs:
             - name: Update Node Module
               run: >-
                   cd $WORKDIR &&
-                  rm -r ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
-                  cp -r src dist package.json ${{env.SLT}}/node_modules/${{env.SLR}} &&
+                  rm -rf ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
+                  cp -r src dist package.json $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}} &&
                   ls -a ${{env.SLT}}/node_modules/${{env.SLR}} &&
                   ls -a ${{env.SLT}}
 
@@ -66,8 +66,8 @@ jobs:
             - name: Update Node Module
               run: >-
                   cd $WORKDIR &&
-                  rm -r ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
-                  cp -r src dist package.json tsconfig.json ${{env.SLT}}/node_modules/${{env.SLR}}
+                  rm -rf ${{env.SLT}}/node_modules/${{env.SLR}}/* &&
+                  cp -r src dist package.json tsconfig.json $WORKDIR/${{env.SLT}}/node_modules/${{env.SLR}}
 
             - name: Build with imported Module
               run: >-
