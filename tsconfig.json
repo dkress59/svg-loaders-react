@@ -4,19 +4,19 @@
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"jsx": "react",
-		"lib": ["ESNext", "DOM"],
+		"lib": ["es5", "dom"],
 		"moduleResolution": "node",
-		"module": "ESNext",
+		"module": "commonjs",
 		"resolveJsonModule": true,
 		"strict": true,
 		"noImplicitAny": false,
-		"target": "ESNext",
+		"target": "es5",
 		"baseUrl": ".",
 		"outDir": "./dist/"
 	},
 	"include": [
 		"**/*.ts",
 		"**/*.tsx",
-		".jest/setupTests.ts"
+		"test/setupTests.ts"
 	]
 }
